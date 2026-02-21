@@ -24,10 +24,34 @@
 
 //Return value (int*): the output digits array.
 //Output parameter (returnSize): set *returnSize to the number of digits in the returned array.
-
+                //  0 1 2 3          4            4
 int* plusOne(int* digits, int digitsSize, int* returnSize) {
-    // TODO: implement
+    int outSize = digitsSize;
 
-    
+    int *newray = (int*)malloc(sizeof(int) * (digitsSize + 1));
+    if (newray == NULL) {
+        *returnSize = 0;
+        return NULL;
+    }
+
+    for (int i = 0; i < digitsSize; i++) {
+        newray[i] = digits[i];
+    }
+
+    for (int i = digitsSize - 1; i >= 0; i--) {
+        if (newray[i] < 9) {
+            newray[i] += 1;
+            *returnSize = outSize;
+            return newray;
+        }
+        newray[i] = 0;
+    }
+
+    newray[0] = 1;
+    for (int i = 1; i <= digitsSize; i++) {
+        newray[i] = 0;
+    }
+    outSize = digitsSize + 1;
+    *returnSize = outSize;
+    return newray;
 }
-

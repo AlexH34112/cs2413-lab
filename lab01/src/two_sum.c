@@ -7,7 +7,19 @@ int two_sum(const int* nums, int n, int target, int* out_i, int* out_j) {
     //  - find i < j such that nums[i] + nums[j] == target
     //  - store indices in *out_i and *out_j
     //  - return 1 if found; otherwise return 0
-    // //////
+
+    for(int a = 0; a < n; a++)
+{
+    for(int b = a+1; b < n; b++)
+    {
+        if((nums[a]+nums[b])==target)
+        {
+            *out_i=a;
+            *out_j=b;
+            return 1;
+        }
+    }
+}
     return 0;
 }
 

@@ -46,27 +46,68 @@ static void heapifyDown(int* heap, int size, int index);
 Return the kth largest element in nums.
 */
 int findKthLargest(int* nums, int numsSize, int k) {
-    /* Write your code here */
-    return 0;
+    int* h = (int*)malloc(k * sizeof(int));
+    int s = 0;
+
+    for (int i = 0; i < numsSize; i++) {
+        if (s < k) {
+            h[s] = nums[i];
+            heapifyUp(h, s);
+            s++;
+        } else if (nums[i] > h[0]) {
+            h[0] = nums[i];
+            heapifyDown(h, k, 0);
+        }
+    }
+
+    int ans = h[0];
+    free(h);
+    return ans;
 }
 
 /*
 Optional helper: swap two integers.
 */
 static void swap(int* a, int* b) {
-    /* Write your code here if you use this helper */
+    int t = *a;
+    *a = *b;
+    *b = t;
 }
 
 /*
 Optional helper: restore min-heap order from a node upward.
 */
-static void heapifyUp(int* heap, int index) {
-    /* Write your code here if you use this helper */
+static void heapifyUp(int* h, int i) {
+    while (i > 0) {
+        int p = (i - 1) / 2;
+        if (h[p] <= h[i]) {
+            break;
+        }
+        swap(&h[p], &h[i]);
+        i = p;
+    }
 }
 
 /*
 Optional helper: restore min-heap order from a node downward.
 */
-static void heapifyDown(int* heap, int size, int index) {
-    /* Write your code here if you use this helper */
+static void heapifyDown(int* h, int n, int i) {
+    while (1) {
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
+        int m = i;
+
+        if (l < n && h[l] < h[m]) {
+            m = l;
+        }
+        if (r < n && h[r] < h[m]) {
+            m = r;
+        }
+        if (m == i) {
+            break;
+        }
+
+        swap(&h[i], &h[m]);
+        i = m;
+    }
 }

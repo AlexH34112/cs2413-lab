@@ -7,32 +7,18 @@
 // Graph* g is a pointer to a Graph struct, which contains a 2D array adj[MAX_NODES][MAX_NODES]. 
 // The value at adj[u][v] is 1 if there is an edge between nodes u and v, and 0 otherwise.
 
-
-
-
 int count_edges(Graph* g) {
-    // TODO: implement
-    // return -1;
+    int a = 0;
 
+    for (int b = 0; b < MAX_NODES; b++) {
+        for (int c = 0; c < MAX_NODES; c++) {
+            if (g->adj[b][c] == 1) {
+                a++;
+            }
+        }
+    }
+    return a / 2;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Tips:
 // Explanation
